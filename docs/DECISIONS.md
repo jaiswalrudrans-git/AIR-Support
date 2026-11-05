@@ -23,3 +23,8 @@ This document records key engineering choices, trade-offs, and design rationale 
 - **Context:** Mountain terrain in Alpine valleys can feature slope rises of >25m over 40m distance. Flying at full 8 m/s forward speed over steep slopes exceeds the vertical climb authority (3.0 m/s) of standard multirotors.
 - **Decision:** In `TERRAIN_FOLLOW` mode, governor scales forward command to 45% (~3.6 m/s) and employs a 0.5s anticipatory elevation lookahead coupled with proportional vertical rate feedback ($K_p = 1.5$).
 - **Rationale:** Guarantees that AGL stays strictly within $\pm 1.0$m across extreme elevation variations without rotor stall or ground collision.
+
+### DEC-005: Thermal Detection Floor Calibration
+- **Context:** At 8m AGL over an Alpine search terrain (background ~14–16°C), a casualty partially concealed under tree foliage has an apparent thermal aperture of ~22.4°C. An absolute threshold floor of 24.0°C blinds the detector to partly concealed casualties.
+- **Decision:** Calibrate `absolute_floor_c` to 21.5°C in `config.py`.
+- **Rationale:** Reliably captures both fully exposed casualties (~30–34°C) and partly concealed victims (~22.4°C) across multi-pass surveys while keeping false positives from cool ground background at zero.

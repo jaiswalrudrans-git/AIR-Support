@@ -95,7 +95,7 @@ class DetectorConfig:
 
     mad_multiplier_k: float = 4.0
     min_delta_c: float = 6.0
-    absolute_floor_c: float = 24.0
+    absolute_floor_c: float = 21.5  # calibrated for partially concealed casualties (DEC-005)
     min_blob_area_px: int = 1
     max_blob_area_px: int = 18  # reject massive hot rock slopes
     human_temp_min_c: float = 26.0
